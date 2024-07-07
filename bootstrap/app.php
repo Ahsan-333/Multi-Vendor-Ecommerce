@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/vendor.php'));
             Route::middleware(['web', 'role:admin'])
                 ->prefix('admin')
-                ->as('admin')
+                ->as('admin.')
                 ->group(base_path('routes/admin.php'));
         },
     )
