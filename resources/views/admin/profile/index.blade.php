@@ -23,7 +23,7 @@
                   <div class="row">
                     <div class="form-group col-12">
                         <div>
-                            <img src="{{ asset(Auth::user()->image ) }}" alt="">
+                            <img width="500px" src="{{ asset(Auth::user()->image ) }}" alt="">
                         </div>
                       <label>Image</label>
                       <input type="file" name="img" class="form-control">
@@ -35,6 +35,41 @@
                     <div class="form-group col-md-6 col-12">
                       <label>Email</label>
                       <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" required="">
+                    </div>
+                  </div>
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="col-12 col-md-12 col-lg-7">
+          <div class="card">
+            @if ($errors->any())
+            @foreach ($errors->all() as $error)
+              <span class="alert alert-danger">{{ $error }}</span>
+            @endforeach
+          @endif
+            <form method="post" class="needs-validation" novalidate="" action="{{ route('admin.update.password') }}" enctype="multipart/form-data">
+                @csrf
+              <div class="card-header">
+                <h4>Update Profile</h4>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                    <div class="form-group col-12">
+                      <label>Current Password</label>
+                      <input type="password" name="current_password" class="form-control" required="">
+                    </div>
+                    <div class="form-group col-12">
+                      <label>New Password</label>
+                      <input type="password" name="password" class="form-control" required="">
+                    </div>
+                    <div class="form-group col-12">
+                      <label>Confrim Password</label>
+                      <input type="password" name="password_confirmation" class="form-control" required="">
                     </div>
                   </div>
               </div>
