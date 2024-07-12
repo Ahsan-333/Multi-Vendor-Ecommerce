@@ -37,7 +37,7 @@
                   </a>
                 </div>
                 <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item orange" href="#">
+                  <a class="wsus__dashboard_item orange" href="dsahboard_profile.html">
                     <i class="fas fa-user-shield"></i>
                     <p>profile</p>
                   </a>
