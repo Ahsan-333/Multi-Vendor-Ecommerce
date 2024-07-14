@@ -12,12 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web', 'role:vendor'])
+            Route::middleware(['web', 'auth', 'role:vendor'])
                 ->prefix('vendor')
                 ->as('vendor.')
                 ->group(base_path('routes/vendor.php'));
                 
-            Route::middleware(['web', 'role:admin'])
+            Route::middleware(['web', 'auth', 'role:admin'])
                 ->prefix('admin')
                 ->as('admin.')
                 ->group(base_path('routes/admin.php'));
