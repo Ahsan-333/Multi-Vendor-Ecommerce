@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
+{{-- <h1 class="text-purple-900 text-4xl bg-teal-600">tailwind</h1> --}}
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
@@ -25,13 +26,15 @@
                     </div>
                   </div>
                   <div class="card-body">
-
+                    {{ $dataTable->table() }}
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </section>
-
+@push('scripts')
+  {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush
+        
 @endsection
