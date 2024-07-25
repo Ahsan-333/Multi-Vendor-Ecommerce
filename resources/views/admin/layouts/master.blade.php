@@ -19,8 +19,10 @@
   <link rel="stylesheet" href="{{asset('backend/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('backend/assets/css/components.css')}}">
   <link rel="stylesheet" href="//cdn.datatables.net/2.1.0/css/dataTables.dataTables.min.css">
-  @vite('resources/css/app.css');
-  
+  <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- @vite('resources/css/app.css'); --}}
+
 <!-- Start GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 <script>
@@ -79,6 +81,58 @@
   <script src="{{asset('backend/assets/js/scripts.js')}}"></script>
   <script src="{{asset('backend/assets/js/custom.js')}}"></script>
   <script src="//cdn.datatables.net/2.1.0/js/dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    $(document).ready(function(){
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $('body').on('click', '.delete-item', function(event){
+        event.preventDefault();
+
+        let deleteUrl = $(this).attr('href');
+
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            $.ajax({
+              type: 'DELETE',
+              url: deleteUrl,
+              success: function(data){
+                if(data.status == 'success'){
+                  Swal.fire(
+                    "Deleted!",
+                    data.message,
+                  );
+                  window.location.reload();
+                }elseif(data.status == 'error'){
+                  Swal.fire(
+                    "Can't Delete!",
+                    data.message,
+                  );
+
+              },
+              error: function(xhr, status, error){
+              console.log(error)
+              }
+          })
+          }
+        });
+
+      });
+    });
+  </script>
           @if ($errors->any())
             @foreach ($errors->all() as $error)
               @php
