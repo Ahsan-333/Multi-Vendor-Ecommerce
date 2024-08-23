@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{asset('backend/assets/css/components.css')}}">
   <link rel="stylesheet" href="//cdn.datatables.net/2.1.0/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
   <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
     {{-- @vite('resources/css/app.css'); --}}
@@ -83,6 +84,7 @@
   <script src="{{asset('backend/assets/js/custom.js')}}"></script>
   <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
   <script src="//cdn.datatables.net/2.1.0/js/dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     $(document).ready(function(){
