@@ -115,12 +115,14 @@
                                 window.location.reload();
                                 Swal.fire(
                                     "Deleted!",
-                                    data.message
+                                    data.message,
+                                    'success'
                                 );
                             }else if(data.status == 'error'){
                                 Swal.fire(
                                     "Can't delete!",
-                                    data.message
+                                    data.message,
+                                    'error'
                                 );
                             }
                         },
@@ -137,11 +139,12 @@
   </script>
           @if ($errors->any())
             @foreach ($errors->all() as $error)
-              @php
-                flash()->error($error)
-              @endphp
+                <script>
+                        toastr.error("{{ $error }}");
+                </script>
             @endforeach
           @endif
+
 @stack('scripts')
 </body>
 </html>

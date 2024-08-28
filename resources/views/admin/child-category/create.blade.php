@@ -4,7 +4,7 @@
       <!-- Main Content -->
         <section class="section">
           <div class="section-header">
-            <h1>Sub Category</h1>
+            <h1>Child Category</h1>
           </div>
 
           <div class="section-body">
@@ -22,7 +22,7 @@
                   </div>
                   <div class="card-body">
 
-                    <form action="{{ route('admin.sub-category.store') }}" method="POST">
+                    <form action="{{ route('admin.child-category.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="inputState">Category ID</label>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputState">Sub Category ID</label>
-                            <select id="inputState" class="form-control sub-category" name="subCategory">
+                            <select id="inputState" class="form-control sub-category" name="sub_category">
                               <option>Select</option>
                             </select>
                         </div>

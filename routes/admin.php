@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\BrandController;
 
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
@@ -28,3 +29,7 @@ Route::resource('/sub-category', SubCategoryController::class);
 Route::put('/childcategory/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
 Route::get('/get-subcategories', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
 Route::resource('/child-category', ChildCategoryController::class);
+
+// Brand Controller
+Route::put('/brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
+Route::resource('/brand', BrandController::class);
