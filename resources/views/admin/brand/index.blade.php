@@ -41,10 +41,29 @@
             let isChecked = $(this).is(':checked');
             let id = $(this).data('id');
             $.ajax({
-                url: '{{ route("admin.category.change-status") }}',
+                url: '{{ route("admin.brand.change-status") }}',
                 method: 'PUT',
                 data: {
                     status: isChecked,
+                    id: id
+                },
+                success:function(data){
+                    toastr.success(data.message);
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error)
+                }
+            })
+        })
+        $('body').on('click', '.change-is_featured', function(){
+            let isChecked = $(this).is(':checked');
+            let id = $(this).data('id');
+            $.ajax({
+                url: '{{ route("admin.brand.change-is_featured") }}',
+                method: 'PUT',
+                data: {
+                    is_featured: isChecked,
                     id: id
                 },
                 success:function(data){

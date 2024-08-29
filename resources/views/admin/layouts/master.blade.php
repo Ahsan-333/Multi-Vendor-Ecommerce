@@ -116,7 +116,7 @@
                                 Swal.fire(
                                     "Deleted!",
                                     data.message,
-                                    'success'
+                                    'success',
                                 );
                             }else if(data.status == 'error'){
                                 Swal.fire(

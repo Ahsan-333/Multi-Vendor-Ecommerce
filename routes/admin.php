@@ -32,4 +32,5 @@ Route::resource('/child-category', ChildCategoryController::class);
 
 // Brand Controller
 Route::put('/brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
+Route::put('/brand/change-is_featured', [BrandController::class, 'changeIsFeatured'])->name('brand.change-is_featured');
 Route::resource('/brand', BrandController::class);
