@@ -108,7 +108,7 @@ class SliderController extends Controller
 
 
 
-        flash()->success('Updated successfully.');
+        toastr()->success('Updated successfully.');
         return redirect()->route('admin.slider.index');
     }
 

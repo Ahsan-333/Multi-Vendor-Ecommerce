@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\AdminVendorProfileController;
+use App\Http\Controllers\Backend\ProductController;
 
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
@@ -34,3 +36,11 @@ Route::resource('/child-category', ChildCategoryController::class);
 Route::put('/brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
 Route::put('/brand/change-is_featured', [BrandController::class, 'changeIsFeatured'])->name('brand.change-is_featured');
 Route::resource('/brand', BrandController::class);
+
+// Vendor Controller
+Route::resource('/vendor-profile', AdminVendorProfileController::class);
+
+// Product Controller
+Route::get('product/get-subcategories', [ProductController::class, 'getSubCategories'])->name('product.get-subcategories');
+Route::get('product/get-childcategories', [ProductController::class, 'getChildCategories'])->name('product.get-childcategories');
+Route::resource('/products', ProductController::class);
