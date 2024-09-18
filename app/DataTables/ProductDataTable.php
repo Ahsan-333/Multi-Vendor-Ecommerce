@@ -27,9 +27,21 @@ class ProductDataTable extends DataTable
                 return $img = "<img width='100px' src='".asset($query->thumb_image)."'></img>";
             })
             ->addColumn('action', function($query){
-                $edit = '<a href="'.route('admin.products.edit', $query->id).'" class="btn btn-primary">Edit</a>';
-                $delete = '<a href="'.route('admin.products.destroy', $query->id).'" class="btn btn-danger ml-2 delete-item">Delete</a>';
-                return $edit.$delete;
+                $edit = '<a href="'.route('admin.product.edit', $query->id).'" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>';
+                $delete = '<a href="'.route('admin.product.destroy', $query->id).'" class="btn btn-danger ml-2 delete-item"><i class="fa fa-trash"></i></a>';
+                $settings = '<div class="btn-group dropleft ml-2">
+                      <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-gear"></i>
+                      </button>
+                      <div class="dropdown-menu dropleft">
+                        <a class="dropdown-item" href="'.route('admin.product-image-gallery.index', ['product'=>$query->id]).'">Image Gallery</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </div>';
+                return $edit.$delete.$settings;
             })
             ->addColumn('product_type', function($query){
                 switch($query->product_type){

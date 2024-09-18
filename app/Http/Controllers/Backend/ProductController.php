@@ -102,7 +102,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $products = Product::findOrFail($id);
+        $categories = Category::all();
+        $sub_categories = SubCategory::all();
+        $child_categories = ChildCategory::all();
+        $brands = Brand::all();
+        return view('admin.product.edit', compact('products', 'categories', 'brands', 'sub_categories', 'child_categories'));
     }
 
     /**
@@ -110,7 +115,52 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'thumb_img' => 'nullable|image|max:3000',
+            'name' => 'required|max:200',
+            'category' => 'required',
+            'brand' => 'required',
+            // 'sku' => 'required',
+            'price' => 'required',
+            // 'offer_price' => 'required',
+            'stock_quantity' => 'required',
+            // 'video_link' => '',
+            'short_description' => 'required|max:600',
+            'long_description' => 'required',
+            'seo_title' => 'max:200|nullable',
+            'seo_description' => 'nullable|max:250',
+            // 'product_type' => 'required',
+
+            'status' => 'required',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $imagePath = $this->updateImage($request, 'thumb_img', 'uploads', $product->thumb_image);
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->thumb_image = empty(!$imagePath) ? $imagePath : $product->thumb_image;
+        $product->vendor_id = Auth::user()->vendor->id;
+        $product->category_id = $request->category;
+        $product->sub_category_id = $request->sub_category;
+        $product->child_category_id = $request->child_category;
+        $product->brand_id = $request->brand;
+        $product->qty = $request->stock_quantity;
+        $product->sku = $request->sku;
+        $product->price = $request->price;
+        $product->offer_price = $request->offer_price;
+        $product->offer_start_date = $request->offer_start_date;
+        $product->offer_end_date = $request->offer_ed_date;
+        $product->video_link = $request->video_link;
+        $product->short_description = $request->short_description;
+        $product->long_description = $request->long_description;
+        $product->seo_title = $request->seo_title;
+        $product->seo_description = $request->seo_description;
+        $product->product_type = $request->product_type;
+        $product->status = $request->status;
+        $product->is_approved = 1;
+        $product->save();
+        toastr('Updated Successfully!', 'success');
+        return redirect()->route('admin.products.index');
     }
 
     /**
