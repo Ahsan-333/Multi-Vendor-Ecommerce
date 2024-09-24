@@ -39,8 +39,8 @@ class ProductImageGalleryController extends Controller
         ]);
 
         $imagePaths = $this->uploadMultiImage($request, 'image', 'uploads');
+        $productImageGallery = new ProductImageGallery();
         foreach($imagePaths as $path){
-            $productImageGallery = new ProductImageGallery();
             $productImageGallery->image = $path;
             $productImageGallery->product_id = $request->product;
             $productImageGallery->save();
@@ -78,6 +78,9 @@ class ProductImageGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $image = ProductImageGallery::findOrFail($id);
+        $this->deleteImage($image->image);
+        $image->delete();
+        return response(['status' => 'success', 'message' => 'Deleted successfully.']);
     }
 }

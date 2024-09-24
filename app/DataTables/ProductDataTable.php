@@ -35,7 +35,7 @@ class ProductDataTable extends DataTable
                       </button>
                       <div class="dropdown-menu dropleft">
                         <a class="dropdown-item" href="'.route('admin.product-image-gallery.index', ['product'=>$query->id]).'">Image Gallery</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="'.route('admin.product-variant.index', ['productss'=>$query->id]).'">Variants</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Separated link</a>

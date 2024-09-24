@@ -23,6 +23,27 @@ class ProductImageGalleryDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'productimagegallery.action')
+            ->addColumn('image', function($query){
+                return $img = "<img width='200px' src='".asset($query->image)."'></img>";
+            })
+            ->addColumn('action', function($query){
+                $edit = '<a href="'.route('admin.product.edit', $query->id).'" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>';
+                $delete = '<a href="'.route('admin.product-image-gallery.destroy', $query->id).'" class="btn btn-danger ml-2 delete-item"><i class="fa fa-trash"></i></a>';
+                $settings = '<div class="btn-group dropleft ml-2">
+                      <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-gear"></i>
+                      </button>
+                      <div class="dropdown-menu dropleft">
+                        <a class="dropdown-item" href="'.route('admin.product-image-gallery.index', ['product'=>$query->id]).'">Image Gallery</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </div>';
+                return $edit.$delete.$settings;
+            })
+            ->rawColumns(['image', 'action'])
             ->setRowId('id');
     }
 
@@ -62,15 +83,13 @@ class ProductImageGalleryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('id')->width(100),
+            Column::make('image'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(400)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 
